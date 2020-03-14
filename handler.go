@@ -18,15 +18,6 @@ type ShakespeareConverter interface {
 	ConvertText(text string) (string, error)
 }
 
-// ShakespeareTranslatorClt implements ShakespeareConverter
-type ShakespeareTranslatorClt struct{}
-
-// ConvertText converts the input text to Shakespearean style using the Fun Translations API.
-// see: https://funtranslations.com/api/shakespeare
-func (s *ShakespeareTranslatorClt) ConvertText(text string) (string, error) {
-	return text, nil
-}
-
 // Handler handles http requests
 type Handler struct {
 	d DescriptionGetter
