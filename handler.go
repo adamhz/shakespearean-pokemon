@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/pkg/errors"
 )
 
 // DescriptionGetter is our type for getting pokemon description
@@ -51,12 +52,16 @@ func (h *Handler) HandleGetPokemon(w http.ResponseWriter, r *http.Request) {
 
 	text, err := h.d.GetDescription(name)
 	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
 		log.Printf("error fetching description: %s", err)
+		return
 	}
 
 	description, err := h.s.ConvertText(text)
 	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		log.Printf("error converting text: %s", err)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -66,6 +71,7 @@ func (h *Handler) HandleGetPokemon(w http.ResponseWriter, r *http.Request) {
 	}
 	err = json.NewEncoder(w).Encode(res)
 	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		log.Printf("error marshalling response: %+v", err)
 	}
 }
