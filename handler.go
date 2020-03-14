@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/pkg/errors"
 )
 
 // DescriptionGetter is our type for getting pokemon description
@@ -19,22 +18,13 @@ type ShakespeareConverter interface {
 	ConvertText(text string) (string, error)
 }
 
-// PokeAPIClt implements DescriptionGetter
-type PokeAPIClt struct{}
-
-// GetDescription fetches the description from the PokeAPI
-// see: https://pokeapi.co/docs/v2.html/#pokemon-species
-func (p *PokeAPIClt) GetDescription(pokemon string) (string, error) {
-	return "foo", nil
-}
-
 // ShakespeareTranslatorClt implements ShakespeareConverter
 type ShakespeareTranslatorClt struct{}
 
 // ConvertText converts the input text to Shakespearean style using the Fun Translations API.
 // see: https://funtranslations.com/api/shakespeare
 func (s *ShakespeareTranslatorClt) ConvertText(text string) (string, error) {
-	return "bar", nil
+	return text, nil
 }
 
 // Handler handles http requests
