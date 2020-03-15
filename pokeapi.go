@@ -44,7 +44,7 @@ func (p *PokeAPIClt) GetDescription(pokemon string) (string, error) {
 	}
 	res, err := clt.Do(req)
 	if err != nil {
-		return "", errors.New("failed to make request")
+		return "", errors.Wrapf(err, "failed to make request to PokeAPI")
 	}
 
 	if res.StatusCode == http.StatusNotFound {
