@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -49,18 +51,22 @@ func (s *ShakespeareTranslatorClt) ConvertText(text string) (string, error) {
 
 	res, err := clt.Do(req)
 	if err != nil {
-		return "", errors.New("failed to make request")
+		return "", errors.Wrapf(err, "failed to make request")
 	}
 
 	if res.StatusCode >= 300 {
-		log.Printf("error translating text: %+v", res)
-		return "", errors.New("error translating text")
+		bs, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			return "", errors.Wrapf(err, fmt.Sprintf("error reading response body: %+v", res))
+		}
+		return "", errors.New(fmt.Sprintf("error translating using Fun Translation API: %s", bs))
 	}
 
 	var translateResponse TranslateResponse
 	err = json.NewDecoder(res.Body).Decode(&translateResponse)
 	if err != nil {
-		return "", err
+		log.Printf("response.Body: %s", res.Body)
+		return "", errors.Wrapf(err, "failed to unmarshal response body")
 	}
 	if translateResponse.Contents == nil {
 		return "", errors.New("failed to translate")
