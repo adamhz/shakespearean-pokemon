@@ -16,8 +16,7 @@ To start service using docker:
 The easiest way to run the service (and avoid having to install go) is by
 loading the provided `image.tar` from disk and running it using the following commands:
 ```
-make load
-make run
+make load run
 ```
 
 The service will start serving on port 3000 and you should see the following log line in your

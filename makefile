@@ -7,11 +7,10 @@ test:
 	go test -v
 
 build:
-	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ./main .
 	docker build -t pokemon-service .
 
 run:
-	docker run -it pokemon-service
+	docker run -p 3000:3000 -it pokemon-service
 
 save:
 	docker save -o image.tar pokemon-service
