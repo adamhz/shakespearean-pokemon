@@ -6,6 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+
+	"github.com/adamhz/shakespearean-pokemon/service"
 )
 
 func main() {
@@ -13,10 +15,8 @@ func main() {
 	addr := fmt.Sprintf("0.0.0.0:%d", 3000)
 
 	// set up route `/pokemon/<pokemon name>`
-	h := Handler{
-		d: &PokeAPIClt{},
-		s: &ShakespeareTranslatorClt{},
-	}
+	h := service.NewHandler(&service.PokeAPIClt{}, &service.ShakespeareTranslatorClt{})
+
 	router := mux.NewRouter()
 	router.HandleFunc("/pokemon/{name}", h.HandleGetPokemon)
 

@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	"encoding/json"
@@ -54,5 +54,12 @@ func (h *Handler) HandleGetPokemon(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		log.Printf("error marshalling response: %+v", err)
+	}
+}
+
+func NewHandler(descriptionGetter DescriptionGetter, shakespeareConverter ShakespeareConverter) *Handler {
+	return &Handler{
+		d: descriptionGetter,
+		s: shakespeareConverter,
 	}
 }

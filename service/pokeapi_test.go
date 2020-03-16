@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	"bytes"
@@ -56,13 +56,6 @@ func TestGetDescription(t *testing.T) {
 						},
 					},
 				},
-			},
-			shouldWork: false,
-		},
-		{
-			name: "no flavor entries",
-			pokemonSpecies: PokemonSpecies{
-				FlavorTextEntries: []FlavorTextEntry{},
 			},
 			shouldWork: false,
 		},

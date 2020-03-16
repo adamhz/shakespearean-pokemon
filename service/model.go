@@ -1,4 +1,4 @@
-package main
+package service
 
 // GetPokemonResponse is returned by the our API
 type GetPokemonResponse struct {

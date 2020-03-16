@@ -4,7 +4,7 @@ lint:
 	golangci-lint run
 
 test:
-	go test -v
+	go test -v ./...
 
 build:
 	docker build -t pokemon-service .

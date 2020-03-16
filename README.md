@@ -1,5 +1,16 @@
 ## Shakespearean Pokemon Service
 
+Service to create Shakespearean descriptions for Pokemon.
+
+### Example
+
+Using Curl:
+
+```
+curl -X GET http://<host>/pokemon/bulbasaur
+{"name":"bulbasaur","description":"Bulbasaur can beest seen napping in bright sunlight. Thither is a seed on its back. By soaking up the travelling lamp’s rays,  the seed grows progressively larger."}
+```
+
 ### Requirements
 
 To build from source:
@@ -22,7 +33,7 @@ make load run
 The service will start serving on port 3000 and you should see the following log line in your
 current terminal session.
 ```
-2020/mm/dd hh:mm:ss starting server on: 0.0.0.0:3000
+yyyy/mm/dd hh:mm:ss starting server on: 0.0.0.0:3000
 ```
 
 To check if the service works:
